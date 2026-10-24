@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://gstatic.com" crossorigin>
+
+		<link href="https://googleapis.com" rel="stylesheet">
+
+		<title>HGDL - Hardest Gurtwall Demon List</title>
+
+		<style>
+			@import url('https://fonts.cdnfonts.com/css/pusab');
+			
+			/*
+			old code (might reuse)
+
+			html {
+				scrollbar-width: thin;
+				scrollbar-color: #888888 #f1f1f1;
+			}
+
+			html:-webkit-scrollbar {
+				width: 10px;
+				height: 10px;
+			}
+
+			html:-webkit-scrollbar-track {
+				background: #f1f1f1;
+				border-radius: 5px;
+			}
+
+			html:-webkit-scrollbar-thumb {
+				background: linear-gradient(firebrick, yellow);
+				border-radius: 5px;
+			}
+
+			html::-webkit-scrollbar-thumb:hover {
+				background: linear-gradient(firebrick, yellow); 
+			}*/
+
+			html {
+				scrollbar-width: thin;
+			}
+
+			html::-webkit-scrollbar {
+				width: 10px;
+			}
+
+			html::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+
+			html::-webkit-scrollbar-thumb {
+				background: linear-gradient(firebrick, yellow);
+				border-radius: 5px;
+			}
+
+			@supports (scrollbar-color: auto) and (not (-webkit-scrollbar: auto)) {
+				html {
+					scrollbar-width: thin;
+					scrollbar-color: #ff7e5f #f1f1f1;
+  				}
+			}
+			
+			#loadContent {
+				color: #fff;
+				text-align: center;
+			}
+			
+			.loader {
+ 				display: block;
+ 				margin: auto;
+				border: 16px solid #3f3f3f;
+				border-radius: 50%;
+				border-top: 15px solid  #ff9900;
+				width: 120px;
+				height: 120px;
+				animation: spin 1.5s ease-in-out infinite;
+			}
+			
+			@keyframes spin {
+ 				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+			
+			#johnTree {
+				display: block;
+				margin: auto;
+			}
+
+			#johnTree:hover {
+				cursor: pointer;
+			}
+
+			.boioing {
+				animation: boioing .25s ease-in-out infinite;
+			}
+
+			@keyframes boioing {
+				0%, 100% {
+					transform: scaleX(1);
+				}
+
+				25% {
+					transform: scaleX(1.25);
+				}
+			}
+			
+			#johnTreesDomain {
+				position: relative;
+				margin-top: 50px;
+				margin-bottom: 50px;
+				
+			}
+			
+			.johnTreeDomainText {
+				text-align: center;
+				font-family: sans-serif, 'Montserrat';
+				font-size: 20px;
+				background: linear-gradient(darkorange 40%, yellow 100%);
+				-webkit-background-clip: text;
+  				background-clip: text;
+  				-webkit-text-fill-color: transparent;
+  				color: transparent;
+			}
+			
+			#johnTreesDomain:before {
+				content: var(--before-content, "hey, im john tree!");
+				position: absolute;
+  
+				left: 50%;
+				top: 250px;
+				transform: translateX(-50%);
+  
+				background-color: rgba(50, 50, 50, 0.5);
+				backdrop-filter: blur(2.5px);
+				color: #fff;
+				padding: 10px 16px;
+				border-radius: 8px;
+				font-family: sans-serif;
+				font-size: 14px;
+				white-space: nowrap;
+				z-index: 2;
+				animation: floataround 2.5s ease-in-out infinite;
+			}
+			
+			@keyframes floataround {
+				0%, 100% { top: 255px }
+				50% { top: 245px }
+			}
+			
+			body {
+				color: #ffffff;
+				background-color: #000015;
+				font-family: 'Montserrat', sans-serif;
+				transition: .5s;
+			}
+
+			button {
+				background: linear-gradient(firebrick, yellow);
+				border-radius: 5px;
+				border: 2.5px solid darkred;
+				box-shadow: 0px 2.5px darkred;
+				transform: rotateX(-25deg);
+				perspective: 50px;
+				padding: 5px;
+				transition: 0.25s;
+			}
+
+			button:hover {
+				box-shadow: 0px 0px darkred;
+				transform: rotateX(25deg);
+				perspective: 0px;
+				cursor: pointer;
+			}
+
+			#menuContent {
+				position: fixed;
+				background-color: rgba(0, 0, 0, 0.25);
+				backdrop-filter: blur(5px);
+				padding: 15px;
+				color: #ffffff;
+				box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+				z-index: 999;
+			}
+
+			#startUpContent {
+				display: block;
+				margin: auto;
+				text-align: center;
+				padding: 15px;
+			}
+
+			#settings {
+				width: 80%;
+				height: 80%;
+				position: fixed;
+				background-color: rgba(50, 50, 50, 0.5);
+				backdrop-filter: blur(5px);
+				padding: 15px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 999;
+			}
+
+			#closeSettingsBtn {
+				color: #fff;
+				border: 2.5px solid darkred;
+				background: linear-gradient(darkred, red);
+				border-radius: 0px;
+				display: block;
+			}
+			
+			#listContent {
+				user-select: none;
+			}
+
+			#listCONTENT {
+				display: flex;
+				justify-content: center;
+			}
+			
+			#listContent ol {
+				counter-reset: my-counter;
+				list-style-type: none;
+				padding-left: 0px;
+				margin-left: 0px;
+			}
+			
+			#listContent ol li {
+				display: flex;
+				white-space: nowrap;
+			}
+			
+			#listContent ol li::before {
+				counter-increment: my-counter;
+				content: counter(my-counter) ".";
+				color: #ffffff;
+				margin-left: 5px;
+			}
+
+			#listContent ol .gurtMadeTN::before {
+				color: goldenrod;
+			}
+			
+			#listContent li  {
+				display: list-item;
+				position: relative;
+				overflow: hidden;
+				max-width: 400px;
+				background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(90deg, #ff00ff 25%, #000 25%, #000 75%, #ff00ff 75%, #ff00ff),
+linear-gradient(-90deg, #ff00ff 25%, #000 25%, #000 75%, #ff00ff 75%, #ff00ff);
+				background-position: center;
+				background-size: cover;
+				border: 5px solid darkred;
+				border-radius: 15px;
+				text-align: center;
+				font-weight: bold;
+				font-size: 25px;
+				margin-top: 15px;
+				margin-bottom: 15px;
+				box-shadow: 0px 0px darkred;
+			}
+
+			#listContent li p {
+				background: linear-gradient(darkorange 40%, yellow 100%);
+				-webkit-background-clip: text;
+  				background-clip: text;
+  				-webkit-text-fill-color: transparent;
+  				color: transparent;
+			}
+			
+			#listContent li:hover {
+				transform: rotateX(-25deg);
+				perspective: 100px;
+				box-shadow: 0px 7.5px darkred;
+				transition: .5s;
+				cursor: pointer;
+			}
+			
+			#listContent li:not(:hover) {
+				transform: rotateX(0deg);
+				perspective: 0px;
+				box-shadow: 0px 0px darkred;
+				transition: .5s;
+			}
+			
+			#listContent li:after {
+				content: '';
+				position: absolute;
+				top: 0px;
+				left: 65%;
+				width: 60px;
+				height: 100%;
+				background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.3), transparent);
+				transform: skewx(30deg) translatex(80px);
+				transition: .5s;
+			}
+
+			#listContent li:hover:after {
+				transform: skewx(30deg) translatex(-500%);
+			}
+			
+			.peak {
+				border: 5px solid goldenrod !important;
+				box-shadow: 0px 0px goldenrod !important;
+			}
+			
+			.peak:hover {
+				box-shadow: 0px 7.5px goldenrod !important;
+			}
+			
+			.peak:not(:hover) {
+				box-shadow: 0px 0px gold;
+			}
+
+			.thumbnailCredits {
+				position: absolute;
+				bottom: 0px;
+				left: 50%;
+				transform: translateX(-50%);
+				font-size: 10px;
+				color: rgba(255, 255, 255, 0.5);
+			}
+
+			.thumbnailCredits a {
+				color: rgba(255, 255, 255, 0.5);
+			}
+
+			.gddlTier {
+				position: absolute;
+				display: flex;
+				width: 40px;
+				height: 40px;
+				justify-content: center;
+				align-items: center;
+				right: 5px;
+				bottom: 5px;
+				pointer-events: none;
+				border-style: solid;
+				border-width: 3.5px;
+				border-color: #5B0529 #280212 #280212 #5B0529;
+				border-radius: 5px;
+				font-family: 'Pusab', 'Montserrat', sans-serif;
+				font-size: 20px;
+				-webkit-text-stroke: .5px #000;
+				text-stroke: .5px #000;
+				text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+				background: #42041E;
+				color: #ffffff;
+			}
+
+			/* gddl tier colors */
+
+			.thirtythree { background: #470313; border-color: #600419 #2D010C #2D010C #600419; }
+			.thirtytwo { background: #4A0207; border-color: #630209 #300104 #300104 #630209; }
+			/* no t31 yet */
+			.thirty { background: #521700; border-color: #6B1E00 #380F00 #380F00 #6B1E00; }
+			.twentynine { background: #5A1802; border-color: #731E02 #401101 #401101 #731E02; }
+			.twentyeight { background: #601A02; border-color: #792002 #461301 #461301 #792002; }
+			.twentyseven { background: #6C1E04; border-color: #852504 #521603 #521603 #852504; }
+			.twentysix { background: #752105; border-color: #8E2806 #5B1903 #5B1903 #8E2806; }
+			.twentyfive { background: #832607; border-color: #9C2D08 #691E05 #691E05 #9C2D08; }
+			.twentyfour { background: #892608; border-color: #A22D09 #6F1E06 #6F1E06 #A22D09; }
+			.twentythree { background: #932B0B; border-color: #AC320C #792309 #792309 #AC320C; }
+			.twentytwo { background: #9B2B0C; border-color: #B4320D #81230A #81230A #B4320D; }
+			.twentyone { background: #A23010; border-color: #BB3712 #88280D #88280D #BB3712; }
+			.twenty { background: #B23415; border-color: #CB3B18 #982C11 #982C11 #CB3B18; }
+			/* non extremes */
+			.nineteen { background: #C03A1B; border-color: #D9411E #A63217 #A63217 #D9411E; }
+			.eighteen { background: #DC3F23; border-color: #F54627 #C2371E #C2371E #F54627; }
+			.seventeen { background: #D93E26; border-color: #F2452A #BF3621 #BF3621 #F2452A; }
+			.sixteen { background: #DA4534; border-color: #F34D3A #C03C2D #C03C2D #F34D3A; }
+			.fifteen { background: #DA493E; border-color: #F35145 #C04036 #C04036 #F35145; }
+			.fourteen { background: #DC514C; border-color: #F55A54 #C24743 #C24743 #F55A54; }
+			.thirteen { background: #DD5A5A; border-color: #F66464 #C34F4F #C24743 #C34F4F; }
+			.twelve { background: #DC6A7D; border-color: #F5768B #C25D6E #C25D6E #F5768B; }
+			.eleven { background: #DB7698; border-color: #F483A9 #C16886 #C16886 #F483A9; }
+			.ten { background: #DA86B0; border-color: #F395C4 #C0769B #C0769B #F395C4; }
+			
+			#rulesContent {
+				user-select: none;
+			}
+			
+			/* span colors */
+			.gold { color: goldenrod; }
+			.cornflowerblue { color: cornflowerblue; }
+			.rainbow { animation: rgb 5s linear infinite; }
+
+			@keyframes rgb {
+				0%, 100% { color: red; }
+				14% { color: orange; }
+				28% { color: yellow; }
+				46% { color: green; }
+				60% { color: blue; }
+				74% { color: purple; }
+				88% { color: pink; }
+			}
+
+			.hidden {
+				display: none !important;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<!-- DOM content loading spinner -->
+		<div id="loadContent">
+			<div class="loader"></div>
+			<p>DOM content loading...</p>
+		</div>
+
+		<div id="siteContent">
+			<div id="menuContent">
+				<h1>hardest gurtwall demon list</h1>
+				<button id="settingsBtn">settings</button>
+				<button id="homePgBtn">Back to Homepage</button>
+			</div>
+
+			<div id="startUpContent">
+				<h1>hardest gurtwall demon list</h1>
+				<button id="settingsBtn2">settings</button>
+			</div>
+
+			<hr id="randomBs">
+			
+			<div id="homeContent">	
+				<button id="showListBtn">View List</button>
+				<button id="showRulesBtn">View Rules</button>
+			</div>
+
+			<!-- John tree -->
+			<div id="johnTreesDomain">
+				<p class="johnTreeDomainText">WELCOME TO JOHN TREE'S DOMAIN</p>
+				<img id="johnTree" src="https://www.sololearn.com/images/tree.jpg" draggable="false">
+				<span id="molecOxyCounter">0 MOLECULAR OXYGEN</span>
+				<button id="clearLocal">clear storage</button>
+			</div>
+
+			<div id="settings">
+				<button id="closeSettingsBtn">x</button>
+				<button id="darkModeBtn">light mode</button>
+			</div>
+
+			<div id="rulesContent">
+				<h1>-Rules-</h1>
+				<hr>
+				<ol>
+					<li><p>For a level to be submitted to the HGDL, it must be at least tier 10 on the <a href="https://gdladder.com/" target="_blank">Geometry Dash Demon Ladder</a>.</p></li>
+					<li><p>Each levels difficulty is dependent on GDDL tiers, and no other sources such as the <a href="https://www.aredl.net" target="_blank">AREDL</a>. However, both AREDL and GDDL information will be provided in the level details.</p></li>
+				</ol>
+			</div>
+
+			<div id="listContent">
+				<p id="thumbnailExclaimer"><i><span class="gold">Gold</span></i> colored list numbers mean that the thumbnail shown for that level on the list was created by a <i><span class="cornflowerblue">Gurtwall member</i>. More information about the creator of the thumbnail can be found in the list level's details. <i><span class="gold">Gold</span></i> thumbnail borders mean that the level is deemed <b><span class="rainbow">peak</span></b> by a majority of the level's victors or members with experience from the level (that is a Gurtwall member, of course).</span></p>
+				<div id="listCONTENT">
+				<ol>
+					<li id="zodiac" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.ytimg.com/vi/dq6zoT5EGcM/maxresdefault.jpg');"><p>Zodiac</p><span class="gddlTier">34</span><span class="thumbnailCredits">Thumbnail by: <a href="https://x.com/ByJoshhh_" target="_blank">ByJoshhh_ (X/Twitter)</a></span></li>
+					<li class="peak gurtMadeTN" id="shardscapes" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/GoXXgrq.png')"><p>Shardscapes</p><span class="gddlTier thirtythree">33</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></span></li>
+					<li id="descentIntoExile" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRe-EZ19r8ib9zUEgj2iIsFbdsMdciq18r_XXKg7T4Ew&s=10')"><p>Descent Into Exile</p><span class="gddlTier thirtytwo">32</span><span class="thumbnailCredits">Thumbnail by: <a href="https://www.youtube.com/redirect?event=video_description&redir_token=QUlxb01IYUVRdUs5V21nUTZSQ2NuSXdBakhsaHxBSTVJdTV0NEZDVW5wMFF1dEFGRmhxazIxNGJCVGl0SVhGLWdycmdaZGpiSUpsMEJUTmx6RVNweFBRRzVsbXcwMlRfbWVYUWdYY3Nmc29oYTA5R09KMFp1U214YkF0SHIyX2Mw&q=https%3A%2F%2Fwww.behance.net%2FZenntraa&v=whtt_WkG_20" target="_blank">Zentra</a></span></li>
+					<li class="gurtMadeTN" id="sonicWave" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/YpWVanG.png')"><p>Sonic Wave</p><span class="gddlTier thirty">30</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li id="catalyze" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqz8ZCmpzbFMPfUifQoDVzFv6WFBJxQVy1zt29nOf3xQ&s=10')"><p>Catalyze</p><span class="gddlTier twentynine">29</span></li>
+					<li class="gurtMadeTN" id="grefg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/1SCLy57.png')"><p>Grefg</p><span class="gddlTier twentynine">29</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li id="snowingInLasVegas" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRvBuM2izOYh4PpbRuzdKcT7e9-QGkysvYUUJwgLm2CA&s=10')"><p>Snowing in Las Vegas</p><span class="gddlTier twentyeight">28</span></li>
+					<li id="quantumProcessing" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiHpQMTgmEwsZvp8OBNtUAe3LyfrDnkgTLXkIyuGdj1w&s=10')"><p>Quantum Processing</p><span class="gddlTier twentyseven">27</span></li>
+					<li class="gurtMadeTN" id="ouroborosStartpos2" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/xtGgDFr.png')"><p>Ouroboros Startpos 2</p><span class="gddlTier twentysix">26</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li id="anahita" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_A1FrMZitlIQ4D7H5OEmppNgmzQHS24_uV691AsDMqw&s=10')"><p>Anahita</p><span class="gddlTier twentyfive">25</span></li>
+					<li class="gurtMadeTN" id="carcano" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.ytimg.com/vi/WzXAcBNFUS4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBOgOAGUqZW2H-SxHCyXdDTr3_2LQ')"><p>Carcano</p><span class="gddlTier twentyfive">25</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li class="gurtMadeTN" id="bloodbath" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/kF3fh1F.png')"><p>Bloodbath</p><span class="gddlTier twentyfour">24</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Gravity</p><span class="gddlTier twentyfour">24</span></li>
+					<li><p>Conical Depression</p><span class="gddlTier twentyfour">24</span></li>
+					<li class="gurtMadeTN" id="karma" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Qu8YJAI.png')"><p>Karma</p><span class="gddlTier twentythree">23</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Eon</p><span class="gddlTier twentythree">23</span></li>
+					<li><p>Lovers Sadness</p><span class="gddlTier twentythree">23</span></li>
+					<li class="gurtMadeTN" id="outOfChaos" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/B4VGHpQ.png')"><p>Out of Chaos</p><span class="gddlTier twentytwo">22</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li class="gurtMadeTN" id="hurricane" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/FraFj9G.png')"><p>Hurricane</p><span class="gddlTier twentytwo">22</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li class="gurtMadeTN" id="iNeverDream" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/tNcGLXw.png')"><p>I NEVER DREAM</p><span class="gddlTier twentytwo">22</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Broken Signal</p><span class="gddlTier twentytwo">22</span></li>
+					<li class="gurtMadeTN" id="crowdControl" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/cwSjUOj.png')"><p>Crowd Control</p><span class="gddlTier twentytwo">22</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li class="gurtMadeTN" id="napalm" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/SEoee52.png')"><p>Napalm</p><span class="gddlTier twentytwo">22</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Imitation Game</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Air Tech</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Dark Odyssey</p><span class="gddlTier twentyone">21</span></li>
+					<li class="gurtMadeTN" id="hypersonic" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/gG3BKjp.png')"><p>Hypersonic</p><span class="gddlTier twentyone">21</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Niwa</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Hazy Memories</p><span class="gddlTier twentyone">21</span></li>
+					<li class="peak" id="melonRiver" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/6p1Nua0.jpeg')"><p>Melon River</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Lost Love</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Cognitive Capacity</p><span class="gddlTier twentyone">21</span></li>
+					<li><p>Mystic Bounds</p><span class="gddlTier twenty">20</span></li>
+					<li><p>Sweater Weather</p><span class="gddlTier twenty">20</span></li>
+					<li><p>Troll Level</p><span class="gddlTier twenty">20</span></li>
+					<li><p>Acu</p><span class="gddlTier twenty">20</span></li>
+					<li><p>Through the Decay</p><span class="gddlTier twenty">20</span></li>
+					<li><p>Duelo Maestro (Solo)</p><span class="gddlTier twenty">20</span></li>
+					<li class="peak gurtMadeTN" id="tinyFingers" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/lw9GnaG.png')"><p>Tiny Fingers</p><span class="gddlTier nineteen">19</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">MyCat</span></li>
+					<li class="peak gurtMadeTN" id="cloudNine" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/qtIur0p.png')"><p>Cloud Nine</p><span class="gddlTier eighteen">18</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Future Funk II</p><span class="gddlTier eighteen">18</span></li>
+					<li class="gurtMadeTN" id="acropolis" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/I3cTptl.png')"><p>Acropolis</p><span class="gddlTier seventeen">17</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Hyperio Technia</p><span class="gddlTier seventeen">17</span></li>
+					<li><p>Ultrachromatic</p><span class="gddlTier seventeen">17</span></li>
+					<li class="gurtMadeTN" id="darkTravel" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/r6HJMRQ.png')"><p>Dark Travel</p><span class="gddlTier seventeen">17</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Denouement</p><span class="gddlTier seventeen">17</span></li>
+					<li><p>SlaughterHouse</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>FFFFFF</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>Poltergeist</p><span class="gddlTier sixteen">16</span></li>
+					<li class="gurtMadeTN" id="rupture" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/3bFhKlm.png')"><p>Rupture</p><span class="gddlTier sixteen">16</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Sleepless</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>Lightwave</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>SFW</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>Windy Landscape</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>Magma Bound</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>ANAMNESIS</p><span class="gddlTier sixteen">16</span></li>
+					<li><p>CraZy II</p><span class="gddlTier fifteen">15</span></li>
+					<li><p>Zirokabi</p><span class="gddlTier fifteen">15</span></li>
+					<li><p>Psychosis</p><span class="gddlTier fifteen">15</span></li>
+					<li><p>64</p><span class="gddlTier fourteen">14</span></li>
+					<li><p>Glass Eyes</p><span class="gddlTier fourteen">14</span></li>
+					<li><p>Haywire</p><span class="gddlTier fourteen">14</span></li>
+					<li><p>Sometimes</p><span class="gddlTier fourteen">14</span></li>
+					<li><p>Backstreet Boy</p><span class="gddlTier fourteen">14</span></li>
+					<li><p>Fairydust</p><span class="gddlTier fourteen">14</span></li>
+					<li class="gurtMadeTN" id="futureFunk" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/TortBvW.png')"><p>Future Funk</p><span class="gddlTier thirteen">13</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>CraZy</p><span class="gddlTier thirteen">13</span></li>
+					<li class="gurtMadeTN" id="aleph0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/mBZM3sX.png')"><p>Aleph 0</p><span class="gddlTier thirteen">13</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Zwoop</p><span class="gddlTier twelve">12</span></li>
+					<li><p>Another Cataclysm</p><span class="gddlTier twelve">12</span></li>
+					<li><p>Hecatomb</p><span class="gddlTier twelve">12</span></li>
+					<li><p>Two Invisible Eyes</p><span class="gddlTier twelve">12</span></li>
+					<li><p>The Final Hour</p><span class="gddlTier twelve">12</span></li>
+					<li><p>To Tango (Solo)</p><span class="gddlTier twelve">12</span></li>
+					<li><p>Octagon Force</p><span class="gddlTier eleven">11</span></li>
+					<li><p>Nine Circles</p><span class="gddlTier eleven">11</span></li>
+					<li class="gurtMadeTN" id="jawbreaker" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/ipLfOGl.png')"><p>Jawbreaker</p><span class="gddlTier eleven">11</span><span class="thumbnailCredits">Thumbnail by: <span class="gold">Noobe</span></li>
+					<li><p>Ocellios</p><span class="gddlTier eleven">11</span></li>
+					<li><p>Propulsion</p><span class="gddlTier eleven">11</span></li>
+					<li><p>CLICK BETWEEN BLOCKS</p><span class="gddlTier eleven">11</span></li>
+					<li><p>White Women</p><span class="gddlTier eleven">11</span></li>
+					<li><p>Tower Descent</p><span class="gddlTier ten">10</span></li>
+					<li><p>Dry Bones</p><span class="gddlTier ten">10</span></li>
+					<li><p>Sheolz</p><span class="gddlTier ten">10</span></li>
+					<li><p>Daybreaker</p><span class="gddlTier ten">10</span></li>
+				</ol>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<script>
+			const loadContent = document.getElementById("loadContent");
+			const body = document.body;
+			const siteContent = document.getElementById("siteContent");
+			siteContent.classList.add("hidden");
+
+			let cookiesAccepted = false;
+			
+			window.addEventListener("load", function () {
+				siteContent.classList.remove("hidden");
+				loadContent.classList.add("hidden");
+
+				if (cookiesAccepted === false) {
+					Swal.fire({
+						theme: "dark",
+						title: "This website uses cookies.",
+						text: "Cookies... you want them... yes you do.. accept the cookies... or John Tree will be displeased",
+						showDenyButton: true,
+						showCancelButton: false,
+						confirmButtonText: "Accept",
+						denyButtonText: `Don't accept`
+					}).then((result) => {
+						if (result.isDenied) cookiesAccepted = false;
+						else if (result.isConfirmed) {
+							cookiesAccepted = true;
+
+							let molecOxy = 0;
+							molecOxy = parseInt(localStorage.getItem("molecOxy"), 10);
+							molecOxyCounter.textContent = molecOxy + " MOLECULAR OXYGEN";
+							let molecOxyMultiplier = 1;
+
+							johnTree.addEventListener("click", function() {
+								molecOxy += molecOxyMultiplier;
+								molecOxyCounter.textContent = molecOxy + " MOLECULAR OXYGEN";
+							});
+								
+							window.addEventListener('beforeunload', (event) => {
+								localStorage.setItem("molecOxy", molecOxy);
+							});
+						}
+					});
+				}
+			});
+			
+			const menuContent = document.getElementById("menuContent");
+			menuContent.classList.add("hidden");
+			const startUpContent = document.getElementById("startUpContent");
+			const homeContent = document.getElementById("homeContent");
+			const rulesContent = document.getElementById("rulesContent");
+			rulesContent.classList.add("hidden");
+			const settings = document.getElementById("settings");
+			settings.classList.add("hidden");
+			const listContent = document.getElementById("listContent");
+			listContent.classList.add("hidden");
+			const showListBtn = document.getElementById("showListBtn");
+			
+			showListBtn.addEventListener("click", function () {
+				homeContent.classList.add("hidden");
+				listContent.classList.remove("hidden");
+				menuContent.classList.remove("hidden");
+				startUpContent.classList.add("hidden");
+			});
+
+			const showRulesBtn = document.getElementById("showRulesBtn");
+
+			showRulesBtn.addEventListener("click", function () {
+				homeContent.classList.add("hidden");
+				rulesContent.classList.remove("hidden");
+				menuContent.classList.remove("hidden");
+				startUpContent.classList.add("hidden");
+			})
+
+			const darkModeBtn = document.getElementById("darkModeBtn");
+			let darkmode = true;
+
+			function darklightmodechange() {
+				if (!darkmode) {
+					darkModeBtn.textContent = "light mode";
+					darkmode = true;
+
+					body.style.backgroundColor = "#000015";
+					body.style.color = "#ffffff";
+				} else {
+					darkModeBtn.textContent = "dark mode";
+					darkmode = false;
+					
+					body.style.backgroundColor = "#ffffff";
+					body.style.color = "#000000";
+				}
+			}
+
+			darkModeBtn.addEventListener("click", darklightmodechange);
+
+			const settingsBtn = document.getElementById("settingsBtn");
+			const settingsBtn2 = document.getElementById("settingsBtn2");
+
+			function openSettings() {
+				settings.classList.remove("hidden");
+				settingsBtn.disabled = true;
+				settingsBtn2.disabled = true;
+				body.style.overflow = "hidden";
+			}
+
+			settingsBtn.addEventListener("click", openSettings);
+			settingsBtn2.addEventListener("click", openSettings);
+
+			const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+
+			function closeSettings() {
+				settings.classList.add("hidden");
+				settingsBtn.disabled = false;
+				settingsBtn2.disabled = false;
+				body.style.overflow = "visible";
+			}
+
+			closeSettingsBtn.addEventListener("click", closeSettings);
+			
+			function goToHomepage() {
+				homeContent.classList.remove("hidden");
+				listContent.classList.add("hidden");
+				rulesContent.classList.add("hidden");
+				menuContent.classList.add("hidden");
+				startUpContent.classList.remove("hidden");
+			}
+
+			const homePgBtn = document.getElementById("homePgBtn");
+			homePgBtn.addEventListener("click", goToHomepage);
+
+			// John Tree content :eyes:
+
+			const johnTree = document.getElementById("johnTree");
+			const johnTreesDomain = document.getElementById("johnTreesDomain");
+			const molecOxyCounter = document.getElementById("molecOxyCounter");
+			const clearLocal = document.getElementById("clearLocal");
+
+			clearLocal.addEventListener("click", function () {
+				localStorage.clear();
+			});
+
+			/*if (cAbtnClicked === true) {
+				let molecOxy = 0;
+				molecOxy = parseInt(localStorage.getItem("molecOxy"), 10);
+				molecOxyCounter.textContent = molecOxy + " MOLECULAR OXYGEN";
+				let molecOxyMultiplier = 1;
+
+				johnTree.addEventListener("click", function() {
+					molecOxy += molecOxyMultiplier;
+					molecOxyCounter.textContent = molecOxy + " MOLECULAR OXYGEN";
+				});
+								
+				window.addEventListener('beforeunload', (event) => {
+					localStorage.setItem("molecOxy", molecOxy);
+				});
+			}*/
+
+			johnTree.addEventListener("click", function() {
+				johnTreesDomain.style.setProperty('--before-content', "'New Content!'");
+				
+				johnTree.classList.add("boioing");
+				setTimeout(() => {
+					johnTree.classList.remove("boioing");
+				}, 250);
+			});
+		</script>
+	</body>
+</html>
